@@ -18,7 +18,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.ozone</groupId>
   <artifactId>ozone-main</artifactId>
-  <version>1.4.0</version>
+  <version>1.4.0.3.2.2.0-2</version>
   <description>Apache Ozone Main</description>
   <name>Apache Ozone Main</name>
   <packaging>pom</packaging>
@@ -63,7 +63,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
   <properties>
     <hadoop2.version>2.10.2</hadoop2.version>
-    <hadoop.version>3.3.6</hadoop.version>
+    <hadoop.version>3.2.3.3.2.2.0-2</hadoop.version>
 
     <!-- version for hdds/ozone components -->
     <hdds.version>${ozone.version}</hdds.version>
@@ -81,7 +81,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <ratis.thirdparty.version>1.0.5</ratis.thirdparty.version>
 
     <!-- Apache Ranger plugin version -->
-    <ranger.version>2.3.0</ranger.version>
+    <ranger.version>2.3.0.3.2.2.0-2</ranger.version>
 
     <distMgmtSnapshotsId>apache.snapshots.https</distMgmtSnapshotsId>
     <distMgmtSnapshotsName>Apache Development Snapshot Repository</distMgmtSnapshotsName>
@@ -226,7 +226,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <jmockit.version>1.24</jmockit.version>
     <junit4.version>4.13.1</junit4.version>
     <junit5.version>5.10.1</junit5.version>
-    <zookeeper.version>3.7.2</zookeeper.version>
+    <zookeeper.version>3.5.10.3.2.2.0-2</zookeeper.version>
 
     <!-- Maven protoc compiler -->
     <protobuf-maven-plugin.version>0.5.1</protobuf-maven-plugin.version>

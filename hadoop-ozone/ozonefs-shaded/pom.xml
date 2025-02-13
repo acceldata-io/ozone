@@ -149,9 +149,6 @@
                     <include>com.github.joshelser.**.*</include>
                     <include>com.twitter.**.*</include>
                   </includes>
-                  <excludes>
-                    <exclude>com.google.common.cache.**.*</exclude>
-                  </excludes>
                 </relocation>
                 <relocation>
                   <pattern>kotlin</pattern>

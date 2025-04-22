@@ -32,6 +32,12 @@ https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <dependency>
       <groupId>org.apache.ozone</groupId>
       <artifactId>ozone-manager</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>com.amazonaws</groupId>
+          <artifactId>jmespath-java</artifactId>
+        </exclusion>
+       </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.ozone</groupId>

@@ -20,10 +20,10 @@ https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>org.apache.ozone</groupId>
     <artifactId>ozone</artifactId>
-    <version>1.4.1.3.3.6.1-SNAPSHOT</version>
+    <version>1.4.1.3.3.6.2-1</version>
   </parent>
   <artifactId>ozone-integration-test</artifactId>
-  <version>1.4.1.3.3.6.1-SNAPSHOT</version>
+  <version>1.4.1.3.3.6.2-1</version>
   <description>Apache Ozone Integration Tests</description>
   <name>Apache Ozone Integration Tests</name>
   <packaging>jar</packaging>
@@ -271,6 +271,11 @@ https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
     </dependency>
   </dependencies>
 

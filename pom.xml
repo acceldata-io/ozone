@@ -18,7 +18,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.ozone</groupId>
   <artifactId>ozone-main</artifactId>
-  <version>1.4.1.3.3.6.1-SNAPSHOT</version>
+  <version>1.4.1.3.3.6.2-1</version>
   <description>Apache Ozone Main</description>
   <name>Apache Ozone Main</name>
   <packaging>pom</packaging>
@@ -33,12 +33,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <repository>
       <id>nexus-releases</id>
       <name>Releases</name>
-     <url>https://repo1.acceldata.dev/repository/odp-staging-release/</url>
+     <url>https://repo1.acceldata.dev/repository/odp-release/</url>
    </repository>
    <snapshotRepository>
      <id>nexus-snapshots</id>
      <name>Snapshot</name>
-     <url>https://repo1.acceldata.dev/repository/odp-staging-snapshot/</url>
+     <url>https://repo1.acceldata.dev/repository/odp-snapshot/</url>
    </snapshotRepository>
   </distributionManagement>
 
@@ -46,7 +46,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <repository>
 	    <id>acceldata staging repo</id>
 	    <name>acceldata staging repo</name>
-	    <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
+	    <url>https://repo1.acceldata.dev/repository/odp-central/</url>
 	    <releases>
 	        <enabled>true</enabled>
 		</releases>
@@ -81,11 +81,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
   <properties>
     <hadoop2.version>2.10.2</hadoop2.version>
-    <hadoop.version>3.3.6.3.3.6.1-SNAPSHOT</hadoop.version>
+    <hadoop.version>3.3.6.3.3.6.2-1</hadoop.version>
 
     <!-- version for hdds/ozone components -->
     <hdds.version>${ozone.version}</hdds.version>
-    <ozone.version>1.4.1.3.3.6.1-SNAPSHOT</ozone.version>
+    <ozone.version>1.4.1.3.3.6.2-1</ozone.version>
     <ozone.release>Hot Springs</ozone.release>
     <declared.hdds.version>${hdds.version}</declared.hdds.version>
     <declared.ozone.version>${ozone.version}</declared.ozone.version>
@@ -99,7 +99,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <ratis.thirdparty.version>1.0.6</ratis.thirdparty.version>
 
     <!-- Apache Ranger plugin version -->
-    <ranger.version>2.5.0.3.3.6.1-SNAPSHOT</ranger.version>
+    <ranger.version>2.5.0.3.3.6.2-1</ranger.version>
 
     <distMgmtSnapshotsId>apache.snapshots.https</distMgmtSnapshotsId>
     <distMgmtSnapshotsName>Apache Development Snapshot Repository</distMgmtSnapshotsName>
@@ -138,7 +138,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <commons-configuration2.version>2.10.1</commons-configuration2.version>
     <zstd-jni.version>1.5.2-5</zstd-jni.version>
     <commons-daemon.version>1.0.13</commons-daemon.version>
-    <commons-io.version>2.11.0</commons-io.version>
+    <commons-io.version>2.15.1</commons-io.version>
     <commons-lang3.version>3.14.0</commons-lang3.version>
     <commons-logging.version>1.2</commons-logging.version>
     <commons-logging-api.version>1.1</commons-logging-api.version>
@@ -183,7 +183,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <!-- jackson versions -->
     <jackson1.version>1.9.13</jackson1.version>
     <jackson-jaxr.version>1.9.13</jackson-jaxr.version>
-    <jackson2-bom.version>2.12.7</jackson2-bom.version>
+    <jackson2-bom.version>2.16.1</jackson2-bom.version>
     <woodstox.version>5.4.0</woodstox.version>
 
     <!-- jaegertracing veresion -->
@@ -214,13 +214,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
     <!-- ProtocolBuffer version, used to verify the protoc version and -->
     <!-- define the protobuf JAR version                               -->
-    <proto2.hadooprpc.protobuf.version>2.5.0</proto2.hadooprpc.protobuf.version>
-    <proto3.hadooprpc.protobuf.version>3.7.1</proto3.hadooprpc.protobuf.version>
-    <hadoop-thirdparty.version>1.1.1</hadoop-thirdparty.version>
+    <proto3.hadooprpc.protobuf.version>3.25.5</proto3.hadooprpc.protobuf.version>
+    <hadoop-thirdparty.version>1.4.0</hadoop-thirdparty.version>
 
     <findbugs.version>3.0.0</findbugs.version>
-    <spotbugs.version>3.1.12</spotbugs.version>
-    <dnsjava.version>2.1.7</dnsjava.version>
+    <spotbugs.version>3.1.12.2</spotbugs.version>
+    <dnsjava.version>3.6.1</dnsjava.version>
     <jakarta.activation.version>1.2.2</jakarta.activation.version>
     <okhttp3.version>4.12.0</okhttp3.version>
     <stax2.version>4.2.2</stax2.version>
@@ -245,7 +244,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <jmockit.version>1.24</jmockit.version>
     <junit4.version>4.13.1</junit4.version>
     <junit5.version>5.10.1</junit5.version>
-    <zookeeper.version>3.8.4.3.3.6.1-SNAPSHOT</zookeeper.version>
+    <zookeeper.version>3.8.4.3.3.6.2-1</zookeeper.version>
 
     <!-- Maven protoc compiler -->
     <protobuf-maven-plugin.version>0.5.1</protobuf-maven-plugin.version>
@@ -254,7 +253,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
     <!-- Use netty version known to work with grpc-netty. See table: -->
     <!-- https://github.com/grpc/grpc-java/blob/master/SECURITY.md#netty -->
-    <netty.version>4.1.109.Final</netty.version>
+    <netty.version>4.1.118.Final</netty.version>
     <io.grpc.version>1.58.0</io.grpc.version>
 
     <rocksdb.version>7.7.3</rocksdb.version>
@@ -308,7 +307,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
     <checkstyle.version>9.3</checkstyle.version>
     <surefire.fork.timeout>1200</surefire.fork.timeout>
-    <aws-java-sdk.version>1.12.765</aws-java-sdk.version>
+    <aws-java-sdk.version>1.12.780</aws-java-sdk.version>
     <frontend-maven-plugin.version>1.15.0</frontend-maven-plugin.version>
     <!-- the version of Hadoop declared in the version resources; can be overridden
     so that Hadoop 3.x can declare itself a 2.x artifact. -->
@@ -1351,11 +1350,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java</artifactId>
-        <version>${proto2.hadooprpc.protobuf.version}</version>
+        <version>${proto3.hadooprpc.protobuf.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.hadoop.thirdparty</groupId>
-        <artifactId>hadoop-shaded-protobuf_3_7</artifactId>
+        <artifactId>hadoop-shaded-protobuf_3_25</artifactId>
         <version>${hadoop-thirdparty.version}</version>
       </dependency>
       <dependency>

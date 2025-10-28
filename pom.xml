@@ -255,7 +255,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <!-- Use netty version known to work with grpc-netty. See table: -->
     <!-- https://github.com/grpc/grpc-java/blob/master/SECURITY.md#netty -->
     <netty.version>4.1.127.Final</netty.version>
-    <io.grpc.version>1.71.0</io.grpc.version>
+    <io.grpc.version>1.60.0</io.grpc.version>
 
     <rocksdb.version>7.7.3</rocksdb.version>
     <sqlite.version>3.44.1.0</sqlite.version>

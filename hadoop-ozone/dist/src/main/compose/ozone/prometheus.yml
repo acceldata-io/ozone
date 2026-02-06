@@ -1,0 +1,63 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+global:
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
+scrape_configs:
+  - job_name: ozone
+    metrics_path: /prom
+    static_configs:
+     - targets:
+        - "scm:9876"
+       labels:
+         component: scm
+     - targets:
+        - "om:9874"
+       labels:
+         component: om
+     - targets:
+        - "s3g:9878"
+       labels:
+         component: s3g
+     - targets: # During compose bring up the number of datanodes can be specific, adding 10 nodes to account for that.
+        # Duplicate datanodes are specified here to account for compose v1 vs v2 differences.
+        # compose v1
+        - "ozone_datanode_1:9882"
+        - "ozone_datanode_2:9882"
+        - "ozone_datanode_3:9882"
+        - "ozone_datanode_4:9882"
+        - "ozone_datanode_5:9882"
+        - "ozone_datanode_6:9882"
+        - "ozone_datanode_7:9882"
+        - "ozone_datanode_8:9882"
+        - "ozone_datanode_9:9882"
+        - "ozone_datanode_10:9882"
+        # compose v2
+        - "ozone-datanode-1:9882"
+        - "ozone-datanode-2:9882"
+        - "ozone-datanode-3:9882"
+        - "ozone-datanode-4:9882"
+        - "ozone-datanode-5:9882"
+        - "ozone-datanode-6:9882"
+        - "ozone-datanode-7:9882"
+        - "ozone-datanode-8:9882"
+        - "ozone-datanode-9:9882"
+        - "ozone-datanode-10:9882"
+       labels:
+         component: datanode
+     - targets:
+         - "recon:9888"
+       labels:
+         component: recon

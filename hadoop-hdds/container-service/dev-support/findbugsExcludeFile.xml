@@ -1,0 +1,96 @@
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<FindBugsFilter>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.volume.AbstractFuture" />
+    <Bug pattern="DLS_DEAD_STORE_OF_CLASS_LITERAL" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.volume.AbstractFuture" />
+    <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.volume.AbstractFuture" />
+    <Bug pattern="NS_DANGEROUS_NON_SHORT_CIRCUIT" />
+  </Match>
+
+  <!-- Test -->
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.TestContainerCache" />
+    <Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.TestDatanodeStateMachine" />
+    <Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.TestDatanodeStateMachine" />
+    <Bug pattern="REC_CATCH_EXCEPTION" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.impl.TestContainerDataYaml" />
+    <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.impl.TestContainerDataYaml" />
+    <Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.impl.TestContainerDeletionChoosingPolicy" />
+    <Bug pattern="UC_USELESS_OBJECT" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.impl.TestContainerPersistence" />
+    <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.interfaces.TestHandler" />
+    <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.statemachine.TestStateContext" />
+    <Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.statemachine.commandhandler.TestDeleteBlocksCommandHandler" />
+    <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.volume.TestVolumeSet" />
+    <Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.common.volume.TestVolumeSet" />
+    <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.keyvalue.TestKeyValueContainerMarkUnhealthy" />
+    <Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.keyvalue.TestTarContainerPacker" />
+    <Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.ozoneimpl.TestBackgroundContainerDataScanner"/>
+    <Bug pattern="RU_INVOKE_RUN, RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT" />
+  </Match>
+  <Match>
+    <Class name="org.apache.hadoop.ozone.container.ozoneimpl.TestBackgroundContainerMetadataScanner"/>
+    <Bug pattern="RU_INVOKE_RUN, RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT" />
+  </Match>
+</FindBugsFilter>

@@ -33,7 +33,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <repository>
       <id>nexus-releases</id>
       <name>Releases</name>
-      <url>https://repo1.acceldata.dev/repository/odp-release/</url>
+      <url>https://repo1.acceldata.dev/repository/odp-staging-release/</url>
     </repository>
     <snapshotRepository>
       <id>nexus-snapshots</id>

@@ -24,8 +24,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import com.google.gson.Gson;
+import javax.xml.XMLConstants;
 import org.apache.hadoop.http.HttpServer2;
-import org.apache.hadoop.thirdparty.com.google.common.base.Strings;
+import com.google.common.base.Strings;
 import org.apache.hadoop.util.XMLUtils;
 import org.eclipse.jetty.util.ajax.JSON;
 import org.junit.jupiter.api.Test;
@@ -145,8 +146,20 @@ public class TestHddsConfServlet {
     HddsConfServlet.writeResponse(getTestConf(), sw, "xml", null);
     String xml = sw.toString();
 
-    DocumentBuilderFactory docBuilderFactory =
-        XMLUtils.newSecureDocumentBuilderFactory();
+    String DISALLOW_DOCTYPE_DECL = "http://apache.org/xml/features/disallow-doctype-decl";
+    String LOAD_EXTERNAL_DECL = "http://apache.org/xml/features/nonvalidating/load-external-dtd";
+    String EXTERNAL_GENERAL_ENTITIES = "http://xml.org/sax/features/external-general-entities";
+    String EXTERNAL_PARAMETER_ENTITIES = "http://xml.org/sax/features/external-parameter-entities";
+    String CREATE_ENTITY_REF_NODES = "http://apache.org/xml/features/dom/create-entity-ref-nodes";
+
+    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+    docBuilderFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+    docBuilderFactory.setFeature(DISALLOW_DOCTYPE_DECL, true);
+    docBuilderFactory.setFeature(LOAD_EXTERNAL_DECL, false);
+    docBuilderFactory.setFeature(EXTERNAL_GENERAL_ENTITIES, false);
+    docBuilderFactory.setFeature(EXTERNAL_PARAMETER_ENTITIES, false);
+    docBuilderFactory.setFeature(CREATE_ENTITY_REF_NODES, false);
+
     DocumentBuilder builder = docBuilderFactory.newDocumentBuilder();
     Document doc = builder.parse(new InputSource(new StringReader(xml)));
     NodeList nameNodes = doc.getElementsByTagName("name");

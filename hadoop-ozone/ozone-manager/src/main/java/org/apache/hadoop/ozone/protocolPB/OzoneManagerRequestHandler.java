@@ -31,7 +31,6 @@ import com.google.protobuf.ServiceException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.hadoop.fs.SafeModeAction;
 import org.apache.hadoop.hdds.client.ECReplicationConfig;
 import org.apache.hadoop.hdds.protocol.proto.HddsProtos;
 import org.apache.hadoop.hdds.protocol.proto.HddsProtos.TransferLeadershipRequestProto;
@@ -125,8 +124,6 @@ import org.apache.hadoop.ozone.protocol.proto.OzoneManagerProtocolProtos.RangerB
 import org.apache.hadoop.ozone.protocol.proto.OzoneManagerProtocolProtos.RepeatedKeyInfo;
 import org.apache.hadoop.ozone.protocol.proto.OzoneManagerProtocolProtos.ServiceListRequest;
 import org.apache.hadoop.ozone.protocol.proto.OzoneManagerProtocolProtos.ServiceListResponse;
-import org.apache.hadoop.ozone.protocol.proto.OzoneManagerProtocolProtos.SetSafeModeRequest;
-import org.apache.hadoop.ozone.protocol.proto.OzoneManagerProtocolProtos.SetSafeModeResponse;
 import org.apache.hadoop.ozone.protocol.proto.OzoneManagerProtocolProtos.GetS3VolumeContextResponse;
 import org.apache.hadoop.ozone.protocol.proto.OzoneManagerProtocolProtos.Status;
 import org.apache.hadoop.ozone.protocol.proto.OzoneManagerProtocolProtos.SnapshotDiffRequest;
@@ -356,11 +353,6 @@ public class OzoneManagerRequestHandler implements RequestHandler {
         break;
       case RefetchSecretKey:
         responseBuilder.setRefetchSecretKeyResponse(refetchSecretKey());
-        break;
-      case SetSafeMode:
-        SetSafeModeResponse setSafeModeResponse =
-            setSafeMode(request.getSetSafeModeRequest());
-        responseBuilder.setSetSafeModeResponse(setSafeModeResponse);
         break;
       case PrintCompactionLogDag:
         PrintCompactionLogDagResponse printCompactionLogDagResponse =
@@ -1483,31 +1475,5 @@ public class OzoneManagerRequestHandler implements RequestHandler {
     String newLeaderId = req.getNewLeaderId();
     impl.transferLeadership(newLeaderId);
     return TransferLeadershipResponseProto.getDefaultInstance();
-  }
-
-  private SetSafeModeResponse setSafeMode(
-      SetSafeModeRequest req) throws IOException {
-    OzoneManagerProtocolProtos.SafeMode safeMode = req.getSafeMode();
-    boolean response = impl.setSafeMode(toSafeModeAction(safeMode), false);
-    return SetSafeModeResponse.newBuilder()
-        .setResponse(response)
-        .build();
-  }
-
-  private SafeModeAction toSafeModeAction(
-      OzoneManagerProtocolProtos.SafeMode safeMode) {
-    switch (safeMode) {
-    case ENTER:
-      return SafeModeAction.ENTER;
-    case LEAVE:
-      return SafeModeAction.LEAVE;
-    case FORCE_EXIT:
-      return SafeModeAction.FORCE_EXIT;
-    case GET:
-      return SafeModeAction.GET;
-    default:
-      throw new IllegalArgumentException("Unexpected safe mode action " +
-          safeMode);
-    }
   }
 }

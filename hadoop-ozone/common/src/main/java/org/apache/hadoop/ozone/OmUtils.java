@@ -270,7 +270,6 @@ public final class OmUtils {
     case CancelSnapshotDiff:
     case ListSnapshotDiffJobs:
     case TransferLeadership:
-    case SetSafeMode:
     case PrintCompactionLogDag:
     case GetSnapshotInfo:
       return true;

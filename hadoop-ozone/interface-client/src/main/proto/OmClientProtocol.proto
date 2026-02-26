@@ -139,7 +139,6 @@ enum Type {
   RefetchSecretKey = 121;
   ListSnapshotDiffJobs = 122;
   CancelSnapshotDiff = 123;
-  SetSafeMode = 124;
   PrintCompactionLogDag = 125;
   ListKeysLight = 126;
   AbortExpiredMultiPartUploads = 127;
@@ -148,12 +147,6 @@ enum Type {
   GetSnapshotInfo = 130;
 }
 
-enum SafeMode {
-    ENTER = 1;
-    LEAVE = 2;
-    FORCE_EXIT = 3;
-    GET = 4;
-}
 
 message OMRequest {
   required Type cmdType = 1; // Type of the command
@@ -275,7 +268,7 @@ message OMRequest {
   optional RefetchSecretKeyRequest          RefetchSecretKeyRequest        = 121;
   optional ListSnapshotDiffJobRequest       ListSnapshotDiffJobRequest     = 122;
   optional CancelSnapshotDiffRequest        CancelSnapshotDiffRequest      = 123;
-  optional SetSafeModeRequest               SetSafeModeRequest             = 124;
+  reserved 124;
   optional PrintCompactionLogDagRequest     PrintCompactionLogDagRequest   = 125;
 
   optional MultipartUploadsExpiredAbortRequest multipartUploadsExpiredAbortRequest = 126;
@@ -395,7 +388,7 @@ message OMResponse {
   optional RefetchSecretKeyResponse          RefetchSecretKeyResponse      = 121;
   optional ListSnapshotDiffJobResponse       ListSnapshotDiffJobResponse   = 122;
   optional CancelSnapshotDiffResponse        cancelSnapshotDiffResponse    = 123;
-  optional SetSafeModeResponse               SetSafeModeResponse           = 124;
+  reserved 124;
   optional PrintCompactionLogDagResponse     PrintCompactionLogDagResponse = 125;
   optional ListKeysLightResponse             listKeysLightResponse         = 126;
   optional MultipartUploadsExpiredAbortResponse multipartUploadsExpiredAbortResponse = 127;
@@ -2104,14 +2097,13 @@ message SetTimesRequest {
 }
 
 message SetTimesResponse {
-}
 
-message SetSafeModeRequest {
-  required SafeMode safeMode    = 1;
-}
 
-message SetSafeModeResponse {
-  optional bool response = 1;
+
+
+
+
+  ]
 }
 
 message OMLockDetailsProto {

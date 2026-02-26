@@ -35,7 +35,6 @@ import org.apache.hadoop.fs.FileAlreadyExistsException;
 import org.apache.hadoop.fs.FileChecksum;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.PathIsNotEmptyDirectoryException;
-import org.apache.hadoop.fs.SafeModeAction;
 import org.apache.hadoop.hdds.client.ReplicationConfig;
 import org.apache.hadoop.hdds.client.ReplicationFactor;
 import org.apache.hadoop.hdds.conf.ConfigurationSource;
@@ -674,38 +673,8 @@ public class BasicOzoneClientAdapterImpl implements OzoneClientAdapter {
   }
 
   @Override
-  public boolean recoverLease(final String pathStr) throws IOException {
-    incrementCounter(Statistic.INVOCATION_RECOVER_LEASE, 1);
-
-    return ozoneClient.getProxy().getOzoneManagerClient().recoverLease(
-        volume.getName(), bucket.getName(), pathStr);
-  }
-
-  @Override
   public void setTimes(String key, long mtime, long atime) throws IOException {
     incrementCounter(Statistic.INVOCATION_SET_TIMES, 1);
     bucket.setTimes(key, mtime, atime);
-  }
-
-  @Override
-  public boolean isFileClosed(String pathStr) throws IOException {
-    incrementCounter(Statistic.INVOCATION_IS_FILE_CLOSED, 1);
-    if (StringUtils.isEmpty(pathStr)) {
-      throw new IOException("not a file");
-    }
-    OzoneFileStatus status = bucket.getFileStatus(pathStr);
-    if (!status.isFile()) {
-      throw new IOException("not a file");
-    }
-    return !status.getKeyInfo().isHsync();
-  }
-
-  @Override
-  public boolean setSafeMode(SafeModeAction action, boolean isChecked)
-      throws IOException {
-    incrementCounter(Statistic.INVOCATION_SET_SAFE_MODE, 1);
-
-    return ozoneClient.getProxy().getOzoneManagerClient().setSafeMode(
-        action, isChecked);
   }
 }

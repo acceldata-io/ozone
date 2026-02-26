@@ -19,10 +19,8 @@ package org.apache.hadoop.fs.ozone;
 
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;
-import org.apache.hadoop.fs.LeaseRecoverable;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.contract.ContractTestUtils;
-import org.apache.hadoop.ozone.om.exceptions.OMException;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -38,8 +36,6 @@ import java.util.concurrent.TimeoutException;
 
 import static org.apache.hadoop.ozone.OzoneConsts.OZONE_URI_DELIMITER;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -91,13 +87,13 @@ public class TestRootedOzoneFileSystemWithFSO
         + root + "/b/c");
 
     // rename should fail and return false
-    assertFalse(getFs().rename(dir2SourcePath, destinPath));
+    Assert.assertFalse(getFs().rename(dir2SourcePath, destinPath));
     // (b) parent of dst is a file. /root_dir/file1/c
     Path filePath = new Path(getBucketPath() + root + "/file1");
     ContractTestUtils.touch(getFs(), filePath);
     Path newDestinPath = new Path(filePath, "c");
     // rename should fail and return false
-    assertFalse(getFs().rename(dir2SourcePath, newDestinPath));
+    Assert.assertFalse(getFs().rename(dir2SourcePath, newDestinPath));
   }
 
   @Test
@@ -151,7 +147,7 @@ public class TestRootedOzoneFileSystemWithFSO
       LOG.info("Created dir1 {}", subDir1);
       LOG.info("Rename op-> source:{} to destin:{}", sourceRoot, subDir1);
       //  rename should fail and return false
-      assertFalse(getFs().rename(sourceRoot, subDir1));
+      Assert.assertFalse(getFs().rename(sourceRoot, subDir1));
     } finally {
       getFs().delete(sourceRoot, true);
     }
@@ -227,27 +223,6 @@ public class TestRootedOzoneFileSystemWithFSO
     FileStatus[] fileStatuses = getFs().listStatus(
         new Path(getBucketPath() + "/testListStatusFSO"));
     assertEquals(valueGreaterBatchSize, fileStatuses.length);
-  }
-
-  @Test
-  public void testLeaseRecoverable() throws Exception {
-    // Create a file
-    final String dir = "dir1";
-    final String key = dir + "/key1";
-    final Path source = new Path(getBucketPath(), key);
-
-    LeaseRecoverable fs = (LeaseRecoverable)getFs();
-    FSDataOutputStream stream = getFs().create(source);
-    try {
-      assertThrows(OMException.class, () -> fs.isFileClosed(source));
-      stream.write(1);
-      stream.hsync();
-      assertFalse(fs.isFileClosed(source));
-      assertTrue(fs.recoverLease(source));
-      assertTrue(fs.isFileClosed(source));
-    } finally {
-      TestLeaseRecovery.closeIgnoringKeyNotFound(stream);
-    }
   }
 
 }

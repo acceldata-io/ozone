@@ -50,7 +50,6 @@ import static org.apache.hadoop.ozone.om.OMConfigKeys.OZONE_OM_ADDRESS_KEY;
 import static org.apache.hadoop.ozone.om.OMConfigKeys.OZONE_OM_RATIS_ENABLE_KEY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -138,7 +137,6 @@ public class TestLeaseRecovery {
     try {
       stream.write(data);
       stream.hsync();
-      assertFalse(fs.isFileClosed(file));
 
       int count = 0;
       while (count++ < 15 && !fs.recoverLease(file)) {
@@ -146,7 +144,6 @@ public class TestLeaseRecovery {
       }
       // The lease should have been recovered.
       assertTrue(fs.recoverLease(file), "File should be closed");
-      assertTrue(fs.isFileClosed(file));
     } finally {
       closeIgnoringKeyNotFound(stream);
     }

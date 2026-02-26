@@ -268,7 +268,7 @@ message OMRequest {
   optional RefetchSecretKeyRequest          RefetchSecretKeyRequest        = 121;
   optional ListSnapshotDiffJobRequest       ListSnapshotDiffJobRequest     = 122;
   optional CancelSnapshotDiffRequest        CancelSnapshotDiffRequest      = 123;
-  reserved 124;
+
   optional PrintCompactionLogDagRequest     PrintCompactionLogDagRequest   = 125;
 
   optional MultipartUploadsExpiredAbortRequest multipartUploadsExpiredAbortRequest = 126;
@@ -388,7 +388,7 @@ message OMResponse {
   optional RefetchSecretKeyResponse          RefetchSecretKeyResponse      = 121;
   optional ListSnapshotDiffJobResponse       ListSnapshotDiffJobResponse   = 122;
   optional CancelSnapshotDiffResponse        cancelSnapshotDiffResponse    = 123;
-  reserved 124;
+
   optional PrintCompactionLogDagResponse     PrintCompactionLogDagResponse = 125;
   optional ListKeysLightResponse             listKeysLightResponse         = 126;
   optional MultipartUploadsExpiredAbortResponse multipartUploadsExpiredAbortResponse = 127;

@@ -121,7 +121,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <failIfNoTests>false</failIfNoTests>
     <surefire.failIfNoSpecifiedTests>false</surefire.failIfNoSpecifiedTests>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-    <jetty.version>9.4.54.v20240208</jetty.version>
+    <jetty.version>9.4.57.v20241219</jetty.version>
     <java.dev.jna.version>5.2.0</java.dev.jna.version>
     <curator.version>5.2.0</curator.version>
     <test.exclude>_</test.exclude>
@@ -147,7 +147,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <commons-pool2.version>2.6.0</commons-pool2.version>
     <commons-text.version>1.11.0</commons-text.version>
     <commons-validator.version>1.6</commons-validator.version>
-    <commons-fileupload.version>1.5</commons-fileupload.version>
+    <commons-fileupload.version>1.6.0</commons-fileupload.version>
     <download-maven-plugin.version>1.7.1</download-maven-plugin.version>
 
     <test.build.dir>${project.build.directory}/test-dir</test.build.dir>
@@ -253,8 +253,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
     <!-- Use netty version known to work with grpc-netty. See table: -->
     <!-- https://github.com/grpc/grpc-java/blob/master/SECURITY.md#netty -->
-    <netty.version>4.1.118.Final</netty.version>
-    <io.grpc.version>1.58.0</io.grpc.version>
+    <netty.version>4.1.111.Final</netty.version>
+    <io.grpc.version>1.60.0</io.grpc.version>
 
     <rocksdb.version>7.7.3</rocksdb.version>
     <sqlite.version>3.44.1.0</sqlite.version>

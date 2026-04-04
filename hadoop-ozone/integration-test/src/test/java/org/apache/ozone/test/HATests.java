@@ -24,7 +24,6 @@ import org.apache.hadoop.hdds.scm.container.TestScmApplyTransactionFailure;
 import org.apache.hadoop.ozone.MiniOzoneCluster;
 import org.apache.hadoop.ozone.MiniOzoneHAClusterImpl;
 import org.apache.hadoop.ozone.TestGetClusterTreeInformation;
-import org.apache.hadoop.ozone.container.metrics.TestDatanodeQueueMetrics;
 import org.apache.hadoop.ozone.shell.TestScmAdminHA;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.TestInstance;
@@ -79,14 +78,6 @@ public abstract class HATests extends ClusterForTests<MiniOzoneHAClusterImpl> {
 
   @Nested
   class GetClusterTreeInformation extends TestGetClusterTreeInformation {
-    @Override
-    public MiniOzoneHAClusterImpl cluster() {
-      return getCluster();
-    }
-  }
-
-  @Nested
-  class DatanodeQueueMetrics extends TestDatanodeQueueMetrics {
     @Override
     public MiniOzoneHAClusterImpl cluster() {
       return getCluster();

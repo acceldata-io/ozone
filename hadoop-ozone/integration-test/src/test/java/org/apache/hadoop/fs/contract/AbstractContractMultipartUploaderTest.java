@@ -354,7 +354,7 @@ public abstract class AbstractContractMultipartUploaderTest extends
                  payload.length,
                  file)) {
       partHandle = awaitFuture(getUploader(index)
-          .putPart(uploadHandle, index, isLastPart, file,
+          .putPart(uploadHandle, index, file,
               new ByteArrayInputStream(payload),
               payload.length));
     }
@@ -522,7 +522,7 @@ public abstract class AbstractContractMultipartUploaderTest extends
       origDigest.update(payload);
       InputStream is = new ByteArrayInputStream(payload);
       PartHandle partHandle = awaitFuture(
-          uploader.putPart(uploadHandle, 1, true, file, is, payload.length));
+          uploader.putPart(uploadHandle, 1, file, is, payload.length));
       partHandles.put(1, partHandle);
       completeUpload(file, uploadHandle, partHandles, origDigest, 0);
     }
@@ -610,7 +610,7 @@ public abstract class AbstractContractMultipartUploaderTest extends
 
     intercept(IOException.class,
         () -> awaitFuture(
-            uploader0.putPart(uploadHandle, 49, true, file, is, len)));
+            uploader0.putPart(uploadHandle, 49, file, is, len)));
     intercept(IOException.class,
         () -> complete(uploader0, uploadHandle, file, partHandles));
 
@@ -710,7 +710,7 @@ public abstract class AbstractContractMultipartUploaderTest extends
     byte[] payload = generatePayload(1);
     InputStream is = new ByteArrayInputStream(payload);
     intercept(IllegalArgumentException.class,
-        () -> uploader0.putPart(emptyHandle, 1, true, dest, is,
+        () -> uploader0.putPart(emptyHandle, 1, dest, is,
             payload.length));
   }
 

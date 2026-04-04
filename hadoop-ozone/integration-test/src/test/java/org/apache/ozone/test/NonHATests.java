@@ -30,10 +30,8 @@ import org.apache.hadoop.hdds.scm.TestGetCommittedBlockLengthAndPutKey;
 import org.apache.hadoop.hdds.scm.TestSCMMXBean;
 import org.apache.hadoop.hdds.scm.TestSCMNodeManagerMXBean;
 import org.apache.hadoop.hdds.scm.TestXceiverClientManager;
-import org.apache.hadoop.hdds.scm.container.metrics.TestSCMContainerManagerMetrics;
 import org.apache.hadoop.hdds.scm.pipeline.TestNode2PipelineMap;
 import org.apache.hadoop.hdds.scm.pipeline.TestPipelineManagerMXBean;
-import org.apache.hadoop.hdds.scm.pipeline.TestSCMPipelineMetrics;
 import org.apache.hadoop.ozone.MiniOzoneCluster;
 import org.apache.hadoop.ozone.TestCpuMetrics;
 import org.apache.hadoop.ozone.admin.om.lease.TestLeaseRecoverer;
@@ -190,14 +188,6 @@ public abstract class NonHATests extends ClusterForTests<MiniOzoneCluster> {
   }
 
   @Nested
-  class SCMContainerManagerMetrics extends TestSCMContainerManagerMetrics {
-    @Override
-    public MiniOzoneCluster cluster() {
-      return getCluster();
-    }
-  }
-
-  @Nested
   class Node2PipelineMap extends TestNode2PipelineMap {
     @Override
     public MiniOzoneCluster cluster() {
@@ -215,14 +205,6 @@ public abstract class NonHATests extends ClusterForTests<MiniOzoneCluster> {
 
   @Nested
   class ReplicationConfigPreference extends TestReplicationConfigPreference {
-    @Override
-    public MiniOzoneCluster cluster() {
-      return getCluster();
-    }
-  }
-
-  @Nested
-  class SCMPipelineMetrics extends TestSCMPipelineMetrics {
     @Override
     public MiniOzoneCluster cluster() {
       return getCluster();

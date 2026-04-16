@@ -16,7 +16,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.ozone</groupId>
   <artifactId>ozone-main</artifactId>
-  <version>2.1.0</version>
+  <version>2.1.0.3.3.6.2-104</version>
   <packaging>pom</packaging>
   <name>Apache Ozone Main</name>
   <description>Apache Ozone Main</description>
@@ -92,6 +92,7 @@
     <exec-maven-plugin.version>3.6.1</exec-maven-plugin.version>
     <failIfNoTests>false</failIfNoTests>
     <frontend-maven-plugin.version>1.15.4</frontend-maven-plugin.version>
+    <grpc.protobuf-compile.version>3.19.6</grpc.protobuf-compile.version>
     <gson.version>2.13.1</gson.version>
     <guava.version>33.5.0-jre</guava.version>
     <guice.version>6.0.0</guice.version>
@@ -99,8 +100,8 @@
     <hadoop-thirdparty.protobuf.artifact>hadoop-shaded-protobuf_3_25</hadoop-thirdparty.protobuf.artifact>
     <hadoop-thirdparty.protobuf.version>3.25.5</hadoop-thirdparty.protobuf.version>
     <hadoop-thirdparty.version>1.4.0</hadoop-thirdparty.version>
-    <hadoop.version>3.4.2</hadoop.version>
-    <hadoop2.version>2.10.2</hadoop2.version>
+    <hadoop.version>3.3.6.3.3.6.2-103</hadoop.version>
+    <hadoop2.version>3.3.6.3.3.6.2-103</hadoop2.version>
     <hamcrest.version>2.2</hamcrest.version>
     <hdds.rocks.native.version>${hdds.version}</hdds.rocks.native.version>
     <hdds.version>${ozone.version}</hdds.version>
@@ -182,7 +183,7 @@
     <opentelemetry.version>1.54.1</opentelemetry.version>
     <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
     <ozone.release>Joshua Tree</ozone.release>
-    <ozone.version>2.1.0</ozone.version>
+    <ozone.version>2.1.0.3.3.6.2-104</ozone.version>
     <picocli.version>4.7.7</picocli.version>
     <plexus-archiver.version>4.2.2</plexus-archiver.version>
     <pmd.version>3.26.0</pmd.version>
@@ -195,13 +196,14 @@
     <properties.maven.plugin.version>1.2.1</properties.maven.plugin.version>
     <proto-backwards-compatibility.version>1.0.7</proto-backwards-compatibility.version>
     <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
-    <protobuf2.version>2.5.0</protobuf2.version>
-    <protobuf3.version>3.25.8</protobuf3.version>
-    <ranger.version>2.6.0</ranger.version>
+    <protobuf.version>3.25.5</protobuf.version>
+    <protobuf2.version>${protobuf.version}</protobuf2.version>
+    <protobuf3.version>${protobuf.version}</protobuf3.version>
+    <ranger.version>2.5.0.3.3.6.2-103</ranger.version>
     <!-- versions included in ratis-thirdparty, update in sync -->
     <ratis-thirdparty.grpc.version>1.71.0</ratis-thirdparty.grpc.version>
     <ratis-thirdparty.netty.version>4.1.119.Final</ratis-thirdparty.netty.version>
-    <ratis-thirdparty.protobuf.version>3.25.5</ratis-thirdparty.protobuf.version>
+    <ratis-thirdparty.protobuf.version>${protobuf.version}</ratis-thirdparty.protobuf.version>
     <ratis.thirdparty.version>1.0.9</ratis.thirdparty.version>
     <ratis.version>3.2.0</ratis.version>
     <re2j.version>1.7</re2j.version>
@@ -235,7 +237,7 @@
     <vault.driver.version>5.1.0</vault.driver.version>
     <weld-servlet.version>3.1.9.Final</weld-servlet.version>
     <woodstox.version>5.4.0</woodstox.version>
-    <zookeeper.version>3.8.4</zookeeper.version>
+    <zookeeper.version>3.8.4.3.3.6.2-103</zookeeper.version>
     <zstd-jni.version>1.5.7-5</zstd-jni.version>
   </properties>
 
@@ -1771,6 +1773,17 @@
           <groupId>dev.aspectj</groupId>
           <artifactId>aspectj-maven-plugin</artifactId>
           <version>${aspectj-plugin.version}</version>
+          <configuration>
+            <complianceLevel>${maven.compiler.release}</complianceLevel>
+            <argumentFileDirectory>${project.build.directory}/aspectj-build</argumentFileDirectory>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.aspectj</groupId>
+              <artifactId>aspectjtools</artifactId>
+              <version>${aspectj.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -2219,12 +2232,6 @@
             <includeTests>true</includeTests>
           </configuration>
         </plugin>
-        <plugin>
-          <groupId>org.xolstice.maven.plugins</groupId>
-          <artifactId>protobuf-maven-plugin</artifactId>
-          <version>${protobuf-maven-plugin.version}</version>
-          <extensions>true</extensions>
-        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -2536,6 +2543,10 @@
       <id>apache.snapshots.https</id>
       <url>https://repository.apache.org/content/repositories/snapshots</url>
     </repository>
+    <repository>
+      <id>acceldata</id>
+      <url>https://repo1.acceldata.dev/repository/odp-central/</url>
+    </repository>
   </repositories>
 
   <distributionManagement>
@@ -2726,6 +2737,23 @@
       <properties>
         <aspectj.version>${aspectj.java21.version}</aspectj.version>
       </properties>
+    </profile>
+    <profile>
+      <id>java11+</id>
+      <activation>
+        <jdk>[11,]</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>dev.aspectj</groupId>
+            <artifactId>aspectj-maven-plugin</artifactId>
+            <configuration>
+              <release>${maven.compiler.release}</release>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
     <profile>
       <id>go-offline</id>

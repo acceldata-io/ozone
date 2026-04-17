@@ -63,6 +63,9 @@
     <copy-rename-maven-plugin.version>1.0.1</copy-rename-maven-plugin.version>
     <curator.version>4.2.0</curator.version>
     <cyclonedx.version>2.9.1</cyclonedx.version>
+    <!-- the version of Hadoop declared in the version resources; can be overridden
+    so that Hadoop 3.x can declare itself a 2.x artifact. -->
+    <declared.hadoop.version>${hadoop.version}</declared.hadoop.version>
     <declared.hdds.version>${hdds.version}</declared.hdds.version>
     <declared.ozone.version>${ozone.version}</declared.ozone.version>
     <derby.version>10.14.2.0</derby.version>
@@ -75,6 +78,7 @@
     <distMgmtStagingUrl>https://repository.apache.org/service/local/staging/deploy/maven2</distMgmtStagingUrl>
     <download-maven-plugin.version>1.9.0</download-maven-plugin.version>
     <dropwizard-metrics.version>3.2.6</dropwizard-metrics.version>
+    <enforced.java.version>[${javac.version},)</enforced.java.version>
     <enforced.maven.version>[3.6.3,)</enforced.maven.version>
     <errorprone-annotations.version>2.29.2</errorprone-annotations.version>
     <!-- test groups excluded by default (without any manual profile activation) -->
@@ -86,7 +90,7 @@
     <guava.version>33.6.0-jre</guava.version>
     <guice.version>6.0.0</guice.version>
     <hadoop.version>3.4.3.3.4.3.0-1</hadoop.version>
-    <hadoop2.version>2.10.2</hadoop2.version>
+    <hadoop2.version>3.4.3.3.4.3.0-1</hadoop2.version>
     <hdds.rocks.native.version>${hdds.version}</hdds.rocks.native.version>
     <hdds.version>${ozone.version}</hdds.version>
     <hk2.version>2.6.1</hk2.version>
@@ -1247,6 +1251,7 @@
         <groupId>org.apache.ozone</groupId>
         <artifactId>hdds-test-utils</artifactId>
         <version>${hdds.version}</version>
+        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>org.apache.ozone</groupId>
@@ -2527,28 +2532,26 @@
 
   <repositories>
     <repository>
+      <id>acceldata staging repo</id>
+      <name>acceldata staging repo</name>
+      <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
       <releases>
-        <enabled>false</enabled>
-        <updatePolicy>never</updatePolicy>
+        <enabled>true</enabled>
       </releases>
       <snapshots>
-        <enabled>false</enabled>
-        <updatePolicy>never</updatePolicy>
+        <enabled>true</enabled>
       </snapshots>
-      <id>apache.snapshots</id>
-      <url>https://repository.apache.org/snapshots</url>
     </repository>
     <repository>
+      <id>acceldata repo</id>
+      <name>acceldata repo</name>
+      <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
       <releases>
-        <enabled>false</enabled>
-        <updatePolicy>never</updatePolicy>
+        <enabled>true</enabled>
       </releases>
       <snapshots>
-        <enabled>false</enabled>
-        <updatePolicy>never</updatePolicy>
+        <enabled>true</enabled>
       </snapshots>
-      <id>apache.snapshots.https</id>
-      <url>https://repository.apache.org/content/repositories/snapshots</url>
     </repository>
   </repositories>
 

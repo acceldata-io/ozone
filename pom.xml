@@ -100,8 +100,8 @@
     <hadoop-thirdparty.protobuf.artifact>hadoop-shaded-protobuf_3_25</hadoop-thirdparty.protobuf.artifact>
     <hadoop-thirdparty.protobuf.version>3.25.5</hadoop-thirdparty.protobuf.version>
     <hadoop-thirdparty.version>1.4.0</hadoop-thirdparty.version>
-    <hadoop.version>3.3.6.3.3.6.2-103</hadoop.version>
-    <hadoop2.version>3.3.6.3.3.6.2-103</hadoop2.version>
+    <hadoop.version>3.3.6.3.3.6.2-104</hadoop.version>
+    <hadoop2.version>3.3.6.3.3.6.2-104</hadoop2.version>
     <hamcrest.version>2.2</hamcrest.version>
     <hdds.rocks.native.version>${hdds.version}</hdds.rocks.native.version>
     <hdds.version>${ozone.version}</hdds.version>
@@ -199,7 +199,7 @@
     <protobuf.version>3.25.5</protobuf.version>
     <protobuf2.version>${protobuf.version}</protobuf2.version>
     <protobuf3.version>${protobuf.version}</protobuf3.version>
-    <ranger.version>2.5.0.3.3.6.2-103</ranger.version>
+    <ranger.version>2.5.0.3.3.6.2-104</ranger.version>
     <!-- versions included in ratis-thirdparty, update in sync -->
     <ratis-thirdparty.grpc.version>1.71.0</ratis-thirdparty.grpc.version>
     <ratis-thirdparty.netty.version>4.1.119.Final</ratis-thirdparty.netty.version>
@@ -237,7 +237,7 @@
     <vault.driver.version>5.1.0</vault.driver.version>
     <weld-servlet.version>3.1.9.Final</weld-servlet.version>
     <woodstox.version>5.4.0</woodstox.version>
-    <zookeeper.version>3.8.4.3.3.6.2-103</zookeeper.version>
+    <zookeeper.version>3.8.4.3.3.6.2-104</zookeeper.version>
     <zstd-jni.version>1.5.7-5</zstd-jni.version>
   </properties>
 

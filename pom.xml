@@ -2520,32 +2520,26 @@
 
   <repositories>
     <repository>
+      <id>acceldata staging repo</id>
+      <name>acceldata staging repo</name>
+      <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
       <releases>
-        <enabled>false</enabled>
-        <updatePolicy>never</updatePolicy>
+        <enabled>true</enabled>
       </releases>
       <snapshots>
-        <enabled>false</enabled>
-        <updatePolicy>never</updatePolicy>
+        <enabled>true</enabled>
       </snapshots>
-      <id>apache.snapshots</id>
-      <url>https://repository.apache.org/snapshots</url>
     </repository>
     <repository>
+      <id>acceldata repo</id>
+      <name>acceldata repo</name>
+      <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
       <releases>
-        <enabled>false</enabled>
-        <updatePolicy>never</updatePolicy>
+        <enabled>true</enabled>
       </releases>
       <snapshots>
-        <enabled>false</enabled>
-        <updatePolicy>never</updatePolicy>
+        <enabled>true</enabled>
       </snapshots>
-      <id>apache.snapshots.https</id>
-      <url>https://repository.apache.org/content/repositories/snapshots</url>
-    </repository>
-    <repository>
-      <id>acceldata</id>
-      <url>https://repo1.acceldata.dev/repository/odp-central/</url>
     </repository>
   </repositories>
 

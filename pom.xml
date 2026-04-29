@@ -46,7 +46,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <repository>
       <id>acceldata staging repo</id>
       <name>acceldata staging repo</name>
-      <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
+      <url>https://repo1.acceldata.dev/repository/odp-central/</url>
       <releases>
         <enabled>true</enabled>
       </releases>
@@ -57,7 +57,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <repository>
       <id>acceldata repo</id>
       <name>acceldata repo</name>
-      <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
+      <url>https://repo1.acceldata.dev/repository/odp-central/</url>
       <releases>
         <enabled>true</enabled>
       </releases>

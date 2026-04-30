@@ -51,37 +51,23 @@ public class RequestContext {
    */
   private final String sessionPolicy;
 
-  @SuppressWarnings("parameternumber")
-  public RequestContext(String host, InetAddress ip,
-      UserGroupInformation clientUgi, String serviceId,
-      ACLIdentityType aclType, ACLType aclRights,
-      String ownerName) {
-    this(host, ip, clientUgi, serviceId, aclType, aclRights, ownerName,
-        false, null);
-  }
+  /**
+   * S3 action name for this request without the s3: prefix (e.g. PutObject), when the call originated from S3 Gateway.
+   * Null for non-S3 clients or when not applicable.
+   */
+  private final String s3Action;
 
-  @SuppressWarnings("parameternumber")
-  public RequestContext(String host, InetAddress ip,
-      UserGroupInformation clientUgi, String serviceId,
-      ACLIdentityType aclType, ACLType aclRights,
-      String ownerName, boolean recursiveAccessCheck) {
-    this(host, ip, clientUgi, serviceId, aclType, aclRights, ownerName,
-        recursiveAccessCheck, null);
-  }
-
-  @SuppressWarnings("parameternumber")
-  public RequestContext(String host, InetAddress ip, UserGroupInformation clientUgi, String serviceId,
-      ACLIdentityType aclType, ACLType aclRights, String ownerName, boolean recursiveAccessCheck,
-      String sessionPolicy) {
-    this.host = host;
-    this.ip = ip;
-    this.clientUgi = clientUgi;
-    this.serviceId = serviceId;
-    this.aclType = aclType;
-    this.aclRights = aclRights;
-    this.ownerName = ownerName;
-    this.recursiveAccessCheck = recursiveAccessCheck;
-    this.sessionPolicy = sessionPolicy;
+  private RequestContext(Builder builder) {
+    this.host = builder.host;
+    this.ip = builder.ip;
+    this.clientUgi = builder.clientUgi;
+    this.serviceId = builder.serviceId;
+    this.aclType = builder.aclType;
+    this.aclRights = builder.aclRights;
+    this.ownerName = builder.ownerName;
+    this.recursiveAccessCheck = builder.recursiveAccessCheck;
+    this.sessionPolicy = builder.sessionPolicy;
+    this.s3Action = builder.s3Action;
   }
 
   /**
@@ -103,6 +89,7 @@ public class RequestContext {
 
     private boolean recursiveAccessCheck;
     private String sessionPolicy;
+    private String s3Action;
 
     public Builder setHost(String bHost) {
       this.host = bHost;
@@ -153,9 +140,13 @@ public class RequestContext {
       return this;
     }
 
+    public Builder setS3Action(String s3Action) {
+      this.s3Action = s3Action;
+      return this;
+    }
+
     public RequestContext build() {
-      return new RequestContext(host, ip, clientUgi, serviceId, aclType,
-          aclRights, ownerName, recursiveAccessCheck, sessionPolicy);
+      return new RequestContext(this);
     }
   }
 
@@ -237,5 +228,23 @@ public class RequestContext {
 
   public String getSessionPolicy() {
     return sessionPolicy;
+  }
+
+  public String getS3Action() {
+    return s3Action;
+  }
+
+  public Builder toBuilder() {
+    return newBuilder()
+        .setHost(host)
+        .setIp(ip)
+        .setClientUgi(clientUgi)
+        .setServiceId(serviceId)
+        .setAclType(aclType)
+        .setAclRights(aclRights)
+        .setOwnerName(ownerName)
+        .setRecursiveAccessCheck(recursiveAccessCheck)
+        .setSessionPolicy(sessionPolicy)
+        .setS3Action(s3Action);
   }
 }

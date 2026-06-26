@@ -16,7 +16,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.ozone</groupId>
   <artifactId>ozone-main</artifactId>
-  <version>2.1.0.3.3.6.4-1</version>
+  <version>2.1.0.3.4.3.0-1</version>
   <packaging>pom</packaging>
   <name>Apache Ozone Main</name>
   <description>Apache Ozone Main</description>
@@ -100,8 +100,8 @@
     <hadoop-thirdparty.protobuf.artifact>hadoop-shaded-protobuf_3_25</hadoop-thirdparty.protobuf.artifact>
     <hadoop-thirdparty.protobuf.version>3.25.5</hadoop-thirdparty.protobuf.version>
     <hadoop-thirdparty.version>1.4.0</hadoop-thirdparty.version>
-    <hadoop.version>3.3.6.3.3.6.4-1</hadoop.version>
-    <hadoop2.version>3.3.6.3.3.6.4-1</hadoop2.version>
+    <hadoop.version>3.4.3.3.4.3.0-1</hadoop.version>
+    <hadoop2.version>3.4.3.3.4.3.0-1</hadoop2.version>
     <hamcrest.version>2.2</hamcrest.version>
     <hdds.rocks.native.version>${hdds.version}</hdds.rocks.native.version>
     <hdds.version>${ozone.version}</hdds.version>
@@ -117,7 +117,7 @@
     <jakarta.ws.rs-api.version>2.1.6</jakarta.ws.rs-api.version>
     <java.dev.jna.version>5.2.0</java.dev.jna.version>
     <java.security.egd>file:///dev/urandom</java.security.egd>
-    <javac.version>8</javac.version>
+    <javac.version>17</javac.version>
     <javassist.version>3.30.2-GA</javassist.version>
     <javax.inject.version>1</javax.inject.version>
     <jaxb-api.version>2.3.3</jaxb-api.version>
@@ -183,7 +183,7 @@
     <opentelemetry.version>1.54.1</opentelemetry.version>
     <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
     <ozone.release>Joshua Tree</ozone.release>
-    <ozone.version>2.1.0.3.3.6.4-1</ozone.version>
+    <ozone.version>2.1.0.3.4.3.0-1</ozone.version>
     <picocli.version>4.7.7</picocli.version>
     <plexus-archiver.version>4.2.2</plexus-archiver.version>
     <pmd.version>3.26.0</pmd.version>
@@ -199,7 +199,7 @@
     <protobuf.version>3.25.5</protobuf.version>
     <protobuf2.version>${protobuf.version}</protobuf2.version>
     <protobuf3.version>${protobuf.version}</protobuf3.version>
-    <ranger.version>2.5.0.3.3.6.4-1</ranger.version>
+    <ranger.version>2.8.0.3.4.3.0-1</ranger.version>
     <!-- versions included in ratis-thirdparty, update in sync -->
     <ratis-thirdparty.grpc.version>1.71.0</ratis-thirdparty.grpc.version>
     <ratis-thirdparty.netty.version>4.1.119.Final</ratis-thirdparty.netty.version>
@@ -237,7 +237,7 @@
     <vault.driver.version>5.1.0</vault.driver.version>
     <weld-servlet.version>3.1.9.Final</weld-servlet.version>
     <woodstox.version>5.4.0</woodstox.version>
-    <zookeeper.version>3.8.4.3.3.6.4-1</zookeeper.version>
+    <zookeeper.version>3.8.6.3.4.3.0-1</zookeeper.version>
     <zstd-jni.version>1.5.7-5</zstd-jni.version>
   </properties>
 

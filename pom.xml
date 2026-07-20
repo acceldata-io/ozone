@@ -176,7 +176,7 @@
     <native.lib.tmp.dir />
     <!-- Use netty version known to work with grpc-netty. See table: -->
     <!-- https://github.com/grpc/grpc-java/blob/master/SECURITY.md#netty -->
-    <netty.version>4.1.119.Final</netty.version>
+    <netty.version>4.1.133.Final</netty.version>
     <!-- Node.js version number (without the v prefix required by frontend-maven-plugin) -->
     <nodejs.version>16.14.2</nodejs.version>
     <odp.release.version>3.3.6.5-SNAPSHOT</odp.release.version>
@@ -203,7 +203,7 @@
     <ranger.version>2.5.0.${odp.release.version}</ranger.version>
     <!-- versions included in ratis-thirdparty, update in sync -->
     <ratis-thirdparty.grpc.version>1.71.0</ratis-thirdparty.grpc.version>
-    <ratis-thirdparty.netty.version>4.1.119.Final</ratis-thirdparty.netty.version>
+    <ratis-thirdparty.netty.version>4.1.133.Final</ratis-thirdparty.netty.version>
     <ratis-thirdparty.protobuf.version>${protobuf.version}</ratis-thirdparty.protobuf.version>
     <ratis.thirdparty.version>1.0.9</ratis.thirdparty.version>
     <ratis.version>3.2.0</ratis.version>

@@ -1952,6 +1952,9 @@
               <requireMavenVersion>
                 <version>${enforced.maven.version}</version>
               </requireMavenVersion>
+              <requireJavaVersion>
+                <version>${enforced.java.version}</version>
+              </requireJavaVersion>
             </rules>
           </configuration>
           <dependencies>
@@ -2557,14 +2560,14 @@
 
   <distributionManagement>
     <repository>
-      <id>${distMgmtStagingId}</id>
-      <name>${distMgmtStagingName}</name>
-      <url>${distMgmtStagingUrl}</url>
+      <id>nexus-releases</id>
+      <name>Releases</name>
+      <url>https://repo1.acceldata.dev/repository/odp-staging-release/</url>
     </repository>
     <snapshotRepository>
-      <id>${distMgmtSnapshotsId}</id>
-      <name>${distMgmtSnapshotsName}</name>
-      <url>${distMgmtSnapshotsUrl}</url>
+      <id>nexus-snapshots</id>
+      <name>Snapshot</name>
+      <url>https://repo1.acceldata.dev/repository/odp-staging-snapshot/</url>
     </snapshotRepository>
   </distributionManagement>
 

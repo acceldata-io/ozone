@@ -123,7 +123,7 @@ public class HttpFSServerWebServer {
         .setName(NAME)
         .setConf(conf)
         .setSSLConf(sslConf)
-        .authFilterConfigurationPrefix(HttpFSAuthenticationFilter.CONF_PREFIX)
+        .setAuthFilterConfigurationPrefix(HttpFSAuthenticationFilter.CONF_PREFIX)
         .setACL(new AccessControlList(conf.get(HTTP_ADMINS_KEY, " ")))
         .addEndpoint(endpoint)
         .build();

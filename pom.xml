@@ -2533,28 +2533,28 @@
     </license>
   </licenses>
 
-  <repositories>
+   <repositories>
     <repository>
-      <id>acceldata staging repo</id>
-      <name>acceldata staging repo</name>
-      <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
       <releases>
         <enabled>true</enabled>
       </releases>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
-    </repository>
-    <repository>
       <id>acceldata repo</id>
       <name>acceldata repo</name>
       <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
+    </repository>
+    <repository>
       <releases>
         <enabled>true</enabled>
       </releases>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
+      <id>acceldata staging repo</id>
+      <name>acceldata staging repo</name>
+      <url>https://repo1.acceldata.dev/repository/odp-staging-central/</url>
     </repository>
   </repositories>
 

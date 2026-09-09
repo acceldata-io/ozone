@@ -2533,7 +2533,7 @@
     </license>
   </licenses>
 
-   <repositories>
+  <repositories>
     <repository>
       <releases>
         <enabled>true</enabled>

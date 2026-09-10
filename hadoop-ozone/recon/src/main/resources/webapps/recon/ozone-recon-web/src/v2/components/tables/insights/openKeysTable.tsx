@@ -38,7 +38,7 @@ import { useDebounce } from '@/v2/hooks/useDebounce';
 import { useApiData } from '@/v2/hooks/useAPIData.hook';
 import { LIMIT_OPTIONS } from '@/v2/constants/limit.constants';
 
-import { OpenKeys, OpenKeysResponse, ReplicationInfo } from '@/v2/types/insights.types';
+import { OpenKeys, OpenKeysResponse } from '@/v2/types/insights.types';
 
 
 //--------Types--------
@@ -129,30 +129,29 @@ const OpenKeysTable: React.FC<OpenKeysTableProps> = ({
     }
   },
   {
-    title: 'Replication Type',
-    dataIndex: 'replicationInfo',
-    key: 'replicationtype',
-    render: (replicationInfo: ReplicationInfo) => (
-      <div>
-        {replicationInfo.replicationType}
-      </div>
-    )
-  },
-  {
     title: 'Replication Factor',
     dataIndex: 'replicationInfo',
     key: 'replicationfactor',
-    render: (replicationInfo: ReplicationInfo) => (
+    render: (replicationInfo: any) => (
       <div>
-        {
-          (replicationInfo.replicationType === "RATIS")
-          ? replicationInfo.replicationFactor
-          : `${replicationInfo.codec}-${replicationInfo.data}-${replicationInfo.parity}`
-        }
+        {Object.values(replicationInfo)[0]}
       </div>
     )
   },
   {
+    title: 'Replication Type',
+    dataIndex: 'replicationInfo',
+    key: 'replicationtype',
+    render: (replicationInfo: any) => (
+      <div>
+        {
+          <div >
+            {Object.values(replicationInfo)[2]}
+          </div>
+        }
+      </div>
+    )
+  }, {
     title: <>
       <Dropdown
         overlay={

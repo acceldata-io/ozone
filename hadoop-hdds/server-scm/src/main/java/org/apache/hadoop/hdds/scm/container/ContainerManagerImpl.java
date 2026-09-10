@@ -281,11 +281,7 @@ public class ContainerManagerImpl implements ContainerManager {
     lock.lock();
     try {
       if (containerExist(cid)) {
-        final ContainerInfo info = containerStateManager.getContainer(cid);
-        if (info != null) {
-          // Delegate to @Replicate method with current sequenceId
-          containerStateManager.updateContainerStateWithSequenceId(protoId, event, info.getSequenceId());
-        }
+        containerStateManager.updateContainerState(protoId, event);
       } else {
         throw new ContainerNotFoundException(cid);
       }

@@ -160,14 +160,11 @@ public interface ContainerStateManager {
       throws IOException;
 
   /**
-   * Updates container state with sequenceId synchronization for HA consistency.
-   * This method ensures that all SCM nodes have the same sequenceId when 
-   * state transitions occur.
+   *
    */
   @Replicate
-  void updateContainerStateWithSequenceId(HddsProtos.ContainerID id,
-                                          HddsProtos.LifeCycleEvent event,
-                                          Long sequenceId)
+  void updateContainerState(HddsProtos.ContainerID id,
+                            HddsProtos.LifeCycleEvent event)
       throws IOException, InvalidStateTransitionException;
 
 

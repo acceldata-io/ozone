@@ -165,9 +165,9 @@ public class TestIncrementalContainerReportHandler {
 
     doAnswer(invocation -> {
       containerStateManager
-          .updateContainerStateWithSequenceId(((ContainerID)invocation
+          .updateContainerState(((ContainerID)invocation
                   .getArguments()[0]).getProtobuf(),
-              (HddsProtos.LifeCycleEvent)invocation.getArguments()[1], 0L);
+              (HddsProtos.LifeCycleEvent)invocation.getArguments()[1]);
       return null;
     }).when(containerManager).updateContainerState(
         any(ContainerID.class),

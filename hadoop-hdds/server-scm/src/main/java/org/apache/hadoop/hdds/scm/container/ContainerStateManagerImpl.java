@@ -353,41 +353,29 @@ public final class ContainerStateManagerImpl
   }
 
   @Override
-  public void updateContainerStateWithSequenceId(final HddsProtos.ContainerID containerID,
-                                                  final LifeCycleEvent event,
-                                                  final Long sequenceId)
+  public void updateContainerState(final HddsProtos.ContainerID containerID,
+                                   final LifeCycleEvent event)
       throws IOException, InvalidStateTransitionException {
     // TODO: Remove the protobuf conversion after fixing ContainerStateMap.
     final ContainerID id = ContainerID.getFromProtobuf(containerID);
 
     try (AutoCloseableLock ignored = writeLock(id)) {
       if (containers.contains(id)) {
-        final ContainerInfo containerInfo = containers.getContainerInfo(id);
-        
-        // Synchronize sequenceId first
-        if (containerInfo.getSequenceId() < sequenceId) {
-          containerInfo.updateSequenceId(sequenceId);
-        } else if (containerInfo.getSequenceId() > sequenceId) {
-          LOG.warn("Container sequenceId is {} greater than the leader container sequenceId {}",
-              containerInfo.getSequenceId(), sequenceId);
-        }
-        
-        final LifeCycleState oldState = containerInfo.getState();
+        final ContainerInfo oldInfo = containers.getContainerInfo(id);
+        final LifeCycleState oldState = oldInfo.getState();
         final LifeCycleState newState = stateMachine.getNextState(
-            oldState, event);
+            oldInfo.getState(), event);
         if (newState.getNumber() > oldState.getNumber()) {
           ExecutionUtil.create(() -> {
             containers.updateState(id, oldState, newState);
             transactionBuffer.addToBuffer(containerStore, id,
                 containers.getContainerInfo(id));
           }).onException(() -> {
+            transactionBuffer.addToBuffer(containerStore, id, oldInfo);
             containers.updateState(id, newState, oldState);
-            ContainerInfo currentInfo = containers.getContainerInfo(id);
-            transactionBuffer.addToBuffer(containerStore, id, currentInfo);
-
           }).execute();
           containerStateChangeActions.getOrDefault(event, info -> { })
-              .accept(containerInfo);
+              .accept(oldInfo);
         }
       }
     }

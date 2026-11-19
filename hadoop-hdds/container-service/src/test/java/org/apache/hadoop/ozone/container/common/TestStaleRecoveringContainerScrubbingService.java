@@ -237,4 +237,30 @@ public class TestStaleRecoveringContainerScrubbingService {
     assertEquals(RECOVERING, containerSet.getContainer(containerId).getContainerState());
     assertTrue(containerSet.getRecoveringContainerMap().containsKey(containerId));
   }
+
+  @ContainerTestVersionInfo.ContainerTest
+  public void testScrubSkippedWhenContainerClosedBeforeTaskRuns(
+      ContainerTestVersionInfo versionInfo) throws Exception {
+    initVersionInfo(versionInfo);
+    ContainerSet containerSet = newContainerSet(1000, testClock);
+    StaleRecoveringContainerScrubbingService srcss =
+        new StaleRecoveringContainerScrubbingService(
+            50, TimeUnit.MILLISECONDS, 10,
+            Duration.ofSeconds(300).toMillis(),
+            containerSet);
+    List<Long> ids = createTestContainers(containerSet, 1, RECOVERING);
+    long containerId = ids.get(0);
+    Container<?> container = containerSet.getContainer(containerId);
+    testClock.fastForward(1000L);
+    BackgroundTaskQueue tasks = srcss.getTasks();
+    assertFalse(tasks.isEmpty());
+
+    container.markContainerForClose();
+    container.close();
+    while (!tasks.isEmpty()) {
+      BackgroundTask task = tasks.poll();
+      task.call();
+    }
+    assertEquals(CLOSED, container.getContainerState());
+  }
 }

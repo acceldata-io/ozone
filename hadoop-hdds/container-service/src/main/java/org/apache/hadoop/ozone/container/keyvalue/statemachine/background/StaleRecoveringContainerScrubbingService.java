@@ -17,9 +17,11 @@
 
 package org.apache.hadoop.ozone.container.keyvalue.statemachine.background;
 
-import java.util.Iterator;
+import static org.apache.hadoop.hdds.protocol.datanode.proto.ContainerProtos.ContainerDataProto.State.RECOVERING;
+
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import org.apache.hadoop.hdds.protocol.datanode.proto.ContainerProtos.ContainerDataProto.State;
 import org.apache.hadoop.hdds.utils.BackgroundService;
 import org.apache.hadoop.hdds.utils.BackgroundTask;
 import org.apache.hadoop.hdds.utils.BackgroundTaskQueue;
@@ -55,16 +57,18 @@ public class StaleRecoveringContainerScrubbingService
     BackgroundTaskQueue backgroundTaskQueue =
         new BackgroundTaskQueue();
     long currentTime = containerSet.getCurrentTime();
-    Iterator<Map.Entry<Long, Long>> it =
-        containerSet.getRecoveringContainerIterator();
-    while (it.hasNext()) {
-      Map.Entry<Long, Long> entry = it.next();
-      if (currentTime >= entry.getKey()) {
+    for (Map.Entry<Long, Long> entry :
+        containerSet.getRecoveringContainerMap().entrySet()) {
+      long containerId = entry.getKey();
+      long deadline = entry.getValue();
+      // Remove only the deadline that was just observed. A PutBlock or
+      // WriteChunk can refresh it between this read and the remove.
+      // ConcurrentHashMap.remove(key, value) fails if the deadline was
+      // replaced, so the extended entry stays.
+      if (currentTime >= deadline && containerSet.getRecoveringContainerMap()
+          .remove(containerId, deadline)) {
         backgroundTaskQueue.add(new RecoveringContainerScrubbingTask(
-            containerSet, entry.getValue()));
-        it.remove();
-      } else {
-        break;
+            containerSet, containerId));
       }
     }
     return backgroundTaskQueue;
@@ -82,9 +86,28 @@ public class StaleRecoveringContainerScrubbingService
 
     @Override
     public BackgroundTaskResult call() throws Exception {
+      Long deadline = containerSet.getRecoveringContainerMap().get(containerID);
+      if (deadline != null && containerSet.getCurrentTime() < deadline) {
+        LOG.debug("Skipping stale recovering scrub for container {} - deadline extended",
+            containerID);
+        return new BackgroundTaskResult.EmptyTaskResult();
+      }
       Container con = containerSet.getContainer(containerID);
       if (null != con) {
-        con.markContainerUnhealthy();
+        con.writeLock();
+        try {
+          // Reconstruction can finish and the container can leave RECOVERING
+          // after this task is queued.
+          State state = con.getContainerState();
+          if (state != RECOVERING) {
+            LOG.debug("Skipping stale recovering scrub for container {} - state is {}",
+                containerID, state);
+            return new BackgroundTaskResult.EmptyTaskResult();
+          }
+          con.markContainerUnhealthy();
+        } finally {
+          con.writeUnlock();
+        }
         LOG.info("Stale recovering container {} marked UNHEALTHY", containerID);
       }
       return new BackgroundTaskResult.EmptyTaskResult();
